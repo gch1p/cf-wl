@@ -1,18 +1,15 @@
 #!/bin/bash
 
-TEMP=$(mktemp)
-IPSET_NAME="$1"
-
 ipset_exists() {
 	ipset -L "$1" >/dev/null 2>/dev/null
 }
 
 die() {
 	echo "error: $@"
-	[ -f "$TEMP" ] && rm "$TEMP"
 	exit 1
 }
 
+IPSET_NAME="$1"
 [ -z "$IPSET_NAME" ] && {
 	echo "usage: $0 IPSET_NAME"
 	exit
